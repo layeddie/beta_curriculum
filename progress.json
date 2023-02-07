@@ -8,7 +8,7 @@
   "credo_reading": false,
   "mazes_exercise": false,
   "rollable_expressions_exercise": false,
-  "modules_reading": false,
+  "modules_reading": true,
   "file_reading": false,
   "agents_and_ets_reading": false,
   "protocols_reading": false,
@@ -43,7 +43,7 @@
   "pascals_triangle_exercise": false,
   "book_search_book_content_reading": false,
   "portfolio_exercise": false,
-  "non_enumerables_reading": false,
+  "non_enumerables_reading": true,
   "control_flow_reading": false,
   "lists_vs_tuples_reading": false,
   "dominoes_exercise": false,
@@ -126,7 +126,7 @@
   "supervisor_and_genserver_drills_exercise": false,
   "computer_hardware_reading": false,
   "supervised_stack_exercise": false,
-  "naming_numbers_exercise": false,
+  "naming_numbers_exercise": true,
   "deployment_exercise": false,
   "typespecs_reading": false,
   "card_counting_exercise": false,
@@ -180,7 +180,7 @@
   "with_points_exercise": false,
   "itinerary_exercise": false,
   "apis_reading": false,
-  "built-in_modules_reading": false,
+  "built-in_modules_reading": true,
   "rps_pattern_matching_exercise": false,
   "arithmetic_reading": false,
   "rps_guards_exercise": false,
@@ -205,5 +205,5 @@
   "fibonacci_exercise": false,
   "typespec_drills_exercise": false,
   "custom_assertions_exercise": false,
-  "atoms_reading": false
+  "atoms_reading": true
 }
