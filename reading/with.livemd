@@ -113,8 +113,10 @@ Let's correct that.
 
 ```elixir
 user = %{is_admin: true}
+IO.inspect(user, label: "USER")
 
 with %{is_admin: true} <- user do
+  IO.inspect(is_admin, label: "ISADMIN")
   "delete user"
 end
 ```
@@ -262,6 +264,20 @@ end
 
 ```elixir
 defmodule Sum do
+  def sum_maps(map1, map2) do
+    with %{value: value1} <- map1, %{value: value2} <- map2 do
+      {:ok, value1 + value2}
+    else
+      _ -> {:error, :invalid}
+    end
+  end
+end
+
+Sum.sum_maps(%{value: 20}, %{value: 20})
+```
+
+```elixir
+defmodule Sum do
   @doc """
   Sum two maps. Return {:ok, value} if valid, and {:error, :invalid} if either input is invalid.
 
@@ -274,8 +290,17 @@ defmodule Sum do
       {:error, :invalid}
   """
   def sum_maps(map1, map2) do
+    with %{value: value1} <- map1, %{value: value2} <- map2 do
+      {:ok, value1 + value2}
+    else
+      _ -> {:error, :invalid}
+    end
   end
 end
+```
+
+```elixir
+Sum.sum_maps(%{value: 20}, 10)
 ```
 
 ## Mark As Completed
