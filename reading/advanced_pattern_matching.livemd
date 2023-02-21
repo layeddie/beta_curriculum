@@ -207,7 +207,7 @@ end
 ```
 
 ```elixir
-Check.must_have_elements!([])
+Check.must_have_elements!(["fred"])
 ```
 
 ## Pattern Matching in A Function Clause
@@ -317,6 +317,14 @@ defmodule Greeter do
     end
   end
 end
+
+Greeter.hello(["Russel"])
+```
+
+```elixir
+Greeter.hello(["Russel"])
+Greeter.hello(["Icia", "Stephen"])
+Greeter.hello(["Swamy", "Jeff", "Jeremy"] |> IO.puts("Hello Everyone")
 ```
 
 ## Pattern Matching in Enumeration
@@ -361,11 +369,26 @@ Create a `Converter` module which uses pattern matching with enumeration and mul
 ```elixir
 defmodule Converter do
   @doc """
+  enumerable = [double: 1, double: 2, triple: 3, quadruple: 4]
 
+  Enum.map(enumerable, fn
+  {:double, value} -> value * 2
+  {:triple, value} -> value * 3
+  {:quadruple, value} -> value * 4
+  end)
   """
   def to_named_strings(integers) do
+    integers = [1, 2, 3, 4]
+
+    Enum.(integers, fn
+      {:double, value} -> value * 2
+      {:triple, value} -> value * 3
+      {:quadruple, value} -> value * 4
+    end)
   end
 end
+
+Converter.to_named_strings(integers)
 ```
 
 ### Your Turn
@@ -391,7 +414,10 @@ end)
 </details>
 
 ```elixir
-
+Enum.map([{:double, 2}, {:halve, 10}, {:double, 4}], fn
+  {:double, integer} -> integer * 2
+  {:halve, integer} -> div(integer, 2)
+end)
 ```
 
 ## Pattern Matching Vs. If
@@ -520,7 +546,7 @@ We'll also use the pin operator when triggering control flow with pattern matchi
 ```elixir
 pinned_value = 1
 
-case {:ok, 1} do
+case {:ok, 2} do
   {:ok, ^pinned_value} -> "clause 1"
   {:ok, generic_value} -> "clause 2"
 end

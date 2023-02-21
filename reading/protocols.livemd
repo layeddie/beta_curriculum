@@ -5,7 +5,8 @@ Mix.install([
   {:jason, "~> 1.4"},
   {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
+  {:ex_duck_smart_cell, "~> 0.1.2"}
 ])
 ```
 
@@ -80,6 +81,14 @@ Enum.random(1..20)
 
 ```elixir
 Enum.random(one: 1, two: 2)
+```
+
+<!-- livebook:{"attrs":{"answer_variable":"elixir","api_result_variable":"api_result","topic":"pattern match"},"chunks":null,"kind":"Elixir.ExDuckSmartCell","livebook_object":"smart_cell"} -->
+
+```elixir
+api_result = ExDuck.query!("pattern match")
+elixir = api_result |> ExDuck.understand()
+elixir |> ExDuck.to_markdown() |> Kino.Markdown.new()
 ```
 
 ## Protocols On Simple Data Types
