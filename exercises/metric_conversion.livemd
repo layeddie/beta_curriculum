@@ -93,6 +93,7 @@ defmodule Metric do
     1000000
   """
   def convert(from, to) do
+    Metric.convert({:centimeter, 100}, :meter)
   end
 end
 ```

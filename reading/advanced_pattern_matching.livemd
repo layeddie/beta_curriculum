@@ -140,7 +140,12 @@ We can use the match operator anytime we have a value bound to a parameter or va
 Create a `case` statement that will return the first element in a 2 element tuple, or the first element in 2 element a list.
 
 ```elixir
-
+case [1, 2, 3] do
+  [head | tail] = list ->
+    IO.inspect(head, label: "head")
+    IO.inspect(tail, label: "tail")
+    IO.inspect(list, label: "list")
+end
 ```
 
 Use pattern matching to ensure the `Check.must_have_elements!/1` function returns true when called with a list that has more than one element and otherwise causes a [FunctionClauseError](https://hexdocs.pm/elixir/FunctionClauseError.html).
@@ -159,6 +164,12 @@ end
 </details>
 
 ```elixir
+# hd([])
+
+tl([])
+```
+
+```elixir
 defmodule Check do
   @doc """
   Doubles a list
@@ -174,10 +185,29 @@ defmodule Check do
       iex> Check.must_have_elements!([])
       ** (FunctionClauseError) no function clause matching in Check.must_have_elements!/1
   """
-  def must_have_elements!(list) do
+
+  def must_have_elements!("fred") do
+    # raise FunctionClauseError
+    true
+  end
+
+  def must_have_elements!([1]) do
+    # raise FunctionClauseError
+    true
+  end
+
+  def must_have_elements!([1, 2, 3]) do
+    true
+  end
+
+  def must_have_elements!([_head | _tail] = _list) do
     true
   end
 end
+```
+
+```elixir
+Check.must_have_elements!([])
 ```
 
 ## Pattern Matching in A Function Clause
@@ -280,6 +310,11 @@ defmodule Greeter do
       "Hello everyone!"
   """
   def hello(names) do
+    case names do
+      [_] -> ["Russel"]
+      [_, _] -> ["Icia", "Stephen"]
+      [_, _, _] -> ["Swamy", "Jeff", "Jeremy"]
+    end
   end
 end
 ```

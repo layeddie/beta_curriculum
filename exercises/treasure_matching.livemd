@@ -27,11 +27,15 @@ jewel
 Use pattern matching to bind a `jewel` variable to the `"jewel"` string.
 
 ```elixir
-[1, 2, 3, "jewel"]
+[1, 2, 3, jewel] = [1, 2, 3, "jewel"]
+jewel
 ```
 
 ```elixir
 %{key1: "value", key2: "jewel"}
+get = %{key1: "value", key2: "jewel"}
+%{key2: jewel} = get
+jewel
 ```
 
 ```elixir
