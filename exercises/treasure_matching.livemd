@@ -27,6 +27,22 @@ jewel
 Use pattern matching to bind a `jewel` variable to the `"jewel"` string.
 
 ```elixir
+g = {"really long string", "even longer really long string"} {"really long string", "even longer really long string"} = g {g1, g2} = g
+1. bind variable to literal
+
+m = %{key: "value"}
+2. flip sides of = match operator
+
+%{key: "value"} = m
+3. assign variable to value
+
+%{key: v1} = m
+
+Use pattern matching to bind a jewel variable to the "jewel" string.
+
+```
+
+```elixir
 [1, 2, 3, jewel] = [1, 2, 3, "jewel"]
 jewel
 ```
@@ -40,18 +56,29 @@ jewel
 
 ```elixir
 %{1 => "jewel"}
+%{1 => name} = %{1 => "jewel"}
+name
 ```
 
 ```elixir
 %{%{key: [1, 2, 3, 4, 5, {}]} => "jewel"}
+# 
+j = %{%{key: [1, 2, 3, 4, 5, {}]} => "jewel"}
+get_in(j, "jewel")
+# [first_person = %{name: first_name} | others] = those_who_are_assembled
 ```
 
 ```elixir
 %{north: %{south: %{west: %{east: "jewel"}}}}
+j = %{north: %{south: %{west: %{east: "jewel"}}}}
+d = get_in(j, {"jewel"})
+d
 ```
 
 ```elixir
 [2, "jewel"]
+[_a, b] = [2, "jewel"]
+b
 ```
 
 ```elixir
@@ -71,7 +98,8 @@ jewel
 ```
 
 ```elixir
-"here is the jewel"
+# "here is the jewel"
+[_1, _2, _3, 4] = String.split("here is the jewel")
 ```
 
 ```elixir

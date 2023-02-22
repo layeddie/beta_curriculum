@@ -92,7 +92,105 @@ defmodule RockPaperScissorsGuards do
     iex> RockPaperScissorsGuards.play(:scissors, :scissors)
     "draw!"
   """
-  def play(guess1, guess2) do
+
+  #   RockPaperScissors.play(:rock, :paper)
+  # "paper beats rock!"
+
+  defguard is_winner(guess1, guess2)
+           when {guess1, guess2} in [{:rock, :scissors}, {:paper, :rock}, {:scissors, :paper}]
+
+  def play(guess1, guess2) when is_winner(guess1, guess2) do
+    "#{guess1} beats #{guess2}!"
+  end
+
+  def play(guess1, guess2) when is_winner(guess2, guess1) do
+    "#{guess2} beats #{guess1}!"
+  end
+
+  def play(guess1, guess2) when guess1 == guess2 do
+    "draw!"
+  end
+end
+
+# rock beats scissors
+# scissors beats paper
+# paper beats rock
+
+# defmodule RockPaperScissors do
+#   defguard is_guess(guess) when guess in [:rock, :paper, :scissors]
+
+#   def winner(guess) when is_guess(guess) do
+#     case guess do
+#       :rock -> :paper
+#       :scissors -> :rock
+#       :paper -> :rock
+#     end
+#   end
+# end
+
+# RockPaperScissors.winner(:rock)
+```
+
+```elixir
+defmodule RockPaperScissors do
+  @moduledoc """
+  Rock Paper Scissors Lizard Spock Game
+  """
+
+  @doc """
+  Returns true if the first guess beats the second, and false otherwise.
+
+  ## Winning Examples
+
+    iex> RockPaperScissorsLizardSpock.beats?(:rock, :lizard)
+    true
+
+     iex> RockPaperScissorsLizardSpock.beats?(:lizard, :rock)
+     false
+
+    iex> RockPaperScissorsLizardSpock.beats?(:rock, :rock)
+    false
+  """
+
+  def beats?(guess1, guess2) do
+    case {guess1, guess2} do
+      {:rock, :scissors} -> true
+      {:scissors, :paper} -> true
+      {:rock, :lizard} -> true
+      {:lizard, :spock} -> true
+      {:paper, :rock} -> true
+      {:spock, :scissors} -> true
+      {:scissors, :lizard} -> true
+      {:lizard, :paper} -> true
+      {:paper, :spock} -> true
+      {:spock, :rock} -> true
+      _ -> false
+    end
+  end
+
+  # player1 = Enum.random(["rock", "paper", "scissors", "lizard", "spock"])
+  # player2 = Enum.random(["rock", "paper", "scissors", "lizard", "spock"])
+
+  @doc """
+  Return "Player 1 Wins!", "Player 2 Wins!", or "Draw" depending on which player guess won.
+
+  ## Examples
+
+    iex> RockPaperScissorsLizardSpock.play(:rock, :lizard)
+    "Player 1 Wins!"
+
+    iex> RockPaperScissorsLizardSpock.play(:lizard, :rock)
+    "Player 2 Wins!"
+
+    iex> RockPaperScissorsLizardSpock.play(:lizard, :lizard)
+    "Player Draws!"
+  """
+  def play(player1, player2) do
+    cond do
+      player1 == player2 -> "Player Draws!"
+      beats?(player1, player2) == true -> "Player 1 Wins!"
+      beats?(player1, player2) == false -> "Player 2 Wins!"
+    end
   end
 end
 ```

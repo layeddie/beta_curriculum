@@ -101,7 +101,9 @@ defmodule Points do
          %{round3: %{team1: t1r3, team2: t2r3}} <- game do
       %{}
       |> Map.put(team1, t1r1 + t1r2 + t1r3)
+      |> IO.inspect()
       |> Map.put(team2, t2r1 + t2r2 + t2r3)
+      |> IO.inspect()
     else
       error ->
         {:error, :invalid}

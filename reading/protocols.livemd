@@ -26,6 +26,10 @@ Upon completing this lesson, a student should be able to answer the following qu
 * How do you achieve data-based polymorphism using protocols?
 * Why might you use protocols instead of some control flow structure or some alternative means of achieving data-based polymorphism?
 
+<!-- livebook:{"break_markdown":true} -->
+
+
+
 ## Protocols
 
 In English, a protocol means a set of rules or procedures. In Elixir, a protocol allows us to
@@ -202,7 +206,13 @@ end
 </details>
 
 ```elixir
+defimpl Adder, for: List do
+  def add(list1, list2) do
+    list1 ++ list2
+  end
+end
 
+Adder.list([], [])
 ```
 
 ## Protocols With Structs
@@ -254,7 +264,7 @@ Sound.say(%Cat{mood: :angry})
 
 ```elixir
 defmodule Dog do
-  defstruct []
+  defstruct [:mood]
 end
 ```
 
@@ -282,7 +292,18 @@ end
 </details>
 
 ```elixir
+defimpl Sound, for: Dog do
+  def say(dog) do
+    case dog.mood do
+      :happy -> "Woof-Woof"
+      :angry -> "Grrr!"
+    end
+  end
+end
+```
 
+```elixir
+Sound.say(%Dog{mood: :angry})
 ```
 
 ## Mark As Completed
