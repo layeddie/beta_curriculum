@@ -212,7 +212,7 @@ Spawn a linked process and crash this Elixir cell below.
 Comment out your solution when complete to avoid continuously crashing the livebook!
 
 ```elixir
-
+# pid1 = spawn(fn -> raise "oops" end)
 ```
 
 ## Message Passing
@@ -258,7 +258,21 @@ In the Elixir cell below, spawn a new process and send it a message `{:hello, "w
 `IO.puts` the message's payload where `"world"` is the payload.
 
 ```elixir
+# # pid = spawn(fn -> IO.puts("I was called") end)
 
+# # Process.sleep(100)
+
+# # Process.alive?(pid) || IO.puts("I am dead :(")
+
+# pid = send(self(), {:hello, "world"}) -> IO.puts("Hello, #{inspect(pid)}")
+
+# # IO.puts("spawn(&Count.down/0) -> #{inspect(pid)}")
+# # :timer.sleep(5000)
+send(self(), {:hello, "world"})
+
+receive do
+  {:hello, payload} -> payload
+end
 ```
 
 ## State
@@ -329,7 +343,7 @@ CounterProcess --> loop --0--> receive --1--> loop
 ```elixir
 defmodule CounterProcess do
   def loop(state \\ 0) do
-    IO.inspect(state, label: "counter")
+    IO.inspect(state, label: "counter in loop")
 
     receive do
       :increment -> loop(state + 1)
@@ -362,7 +376,7 @@ defmodule Counter do
     IO.inspect(state, label: "counter")
 
     receive do
-      :increment -> loop(state + 1)
+      :decrement -> loop(state - 1)
     end
   end
 end
@@ -373,7 +387,7 @@ counter_process = spawn(fn -> Counter.loop() end)
 You should be able to send a `:decrement` message to a spawned `Counter`. Uncomment and evaluate the code below to test your solution.
 
 ```elixir
-# send(counter_process, :decrement)
+send(counter_process, :decrement)
 ```
 
 ## Mark As Completed

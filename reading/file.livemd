@@ -145,7 +145,7 @@ DO NOT DELETE IMPORTANT FILES ON YOUR SYSTEM WHEN USING THE FILE MODULE
 </div>
 
 ```elixir
-
+File.ls()
 ```
 
 ## Path Module Functions
@@ -185,7 +185,7 @@ Path.join(path1, path2)
 Experiment with the functions above. Refer to the documentation for examples you can try.
 
 ```elixir
-
+Path.absname("projects")
 ```
 
 ## Bang Functions
@@ -195,7 +195,7 @@ Many functions in the [File](https://hexdocs.pm/elixir/File.html) module have a 
 Bang functions raise an error if they fail.
 
 ```elixir
-File.ls!("invalid")
+File.ls!("/Users/elay14")
 ```
 
 Regular functions typically return an `{:ok, value}` or an `{:error, reason}` tuple.

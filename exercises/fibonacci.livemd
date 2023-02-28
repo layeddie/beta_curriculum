@@ -89,9 +89,19 @@ defmodule Fibonacci do
     iex> Fibonacci.of(20)
     6765
   """
-  def of(n) do
+  #   def of(n) do
+  #   end
+  # end
+
+  # defmodule Factorial do
+  def f(0), do: 1
+
+  def f(i) when i > 0 do
+    n * f(i - 1)
   end
 end
+
+Fibonacci.f(4)
 ```
 
 ## Mark As Completed

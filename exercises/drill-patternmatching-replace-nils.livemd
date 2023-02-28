@@ -64,10 +64,16 @@ defmodule ReplaceNils do
   @doc """
   replace nil values in the first list with values from the second list in the same position.
   """
+
+  # @input1 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  # @input2 [nil, nil, nil, nil, nil, nil, nil, nil, nil, nil]
+
   def replace(input1, input2) do
     nil
   end
 end
+
+ReplaceNils.replace([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [nil, nil, nil, nil, nil])
 ```
 
 Here are some additional test data to think about:

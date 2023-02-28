@@ -201,8 +201,7 @@ defmodule GenericServer do
     send(server_pid, {request, self()})
 
     receive do
-      {:response, response} ->
-        response
+      {:response, response} -> response
     end
   end
 
@@ -442,7 +441,20 @@ end
 </details>
 
 ```elixir
+defmodule Journal do
+  use GenServer
 
+  @impl true
+  def init(_opts) do
+    {:ok, []}
+  end
+
+  @impl true
+  def handle_call({:add_entry, message}, _from, entries) do
+    new_entries = [message | entries]
+    {:reply, new_entries, new_entries}
+  end
+end
 ```
 
 ## Client / Server APIs
@@ -462,10 +474,12 @@ defmodule CounterClientAndServer do
 
   def start_link(_opts) do
     GenServer.start_link(CounterClientAndServer, [])
+    # IO.inspect(:name, label: "Bind Genserver pid to pid variable")
   end
 
   def increment(counter_pid) do
     GenServer.call(counter_pid, :increment)
+    IO.inspect(counter_pid, label: "Counter pid value")
   end
 
   # Server callbacks
@@ -487,6 +501,7 @@ Let's start our [GenServer](https://hexdocs.pm/elixir/GenServer.html) and bind i
 
 ```elixir
 {:ok, pid} = CounterClientAndServer.start_link([])
+IO.inspect(pid, label: "Bind Genserver pid to pid variable")
 ```
 
 Now execute the Elixir cell below a few times and notice that the counter increments on each execution just as before.
@@ -568,6 +583,7 @@ Here's a `CounterSingleton` module which demonstrates how to configure the modul
 ```elixir
 defmodule CounterSingleton do
   use GenServer
+  require Logger
 
   def start_link(init_arg) do
     GenServer.start_link(__MODULE__, init_arg, name: __MODULE__)
@@ -580,7 +596,15 @@ defmodule CounterSingleton do
 
   @impl true
   def handle_call(:increment, _from, state) do
+    IO.inspect(state, label: "state coming in")
     {:reply, state + 1, state + 1}
+    IO.inspect(state, label: "incremented state")
+  end
+
+  @impl true
+  def handle_info(msg, state) do
+    Logger.info("Received unexpected message: #{inspect(msg)}")
+    {:noreply, state}
   end
 end
 ```
