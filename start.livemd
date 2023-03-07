@@ -1,5 +1,12 @@
 # Course Outline
 
+```elixir
+Mix.install([
+  {:kino, "~> 0.8.1"},
+  {:jason, "~> 1.4"}
+])
+```
+
 ## Overview
 
 Use the following index to find reading material and exercises for this course.

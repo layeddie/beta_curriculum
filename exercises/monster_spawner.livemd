@@ -5,7 +5,7 @@ Mix.install([
   {:jason, "~> 1.4"},
   {:kino, "~> 0.8.0", override: true},
   {:youtube, github: "brooklinjazz/youtube"},
-  {:hidden_cell, github: "brooklinjazz/hidden_cell"},
+  {:hidden_cell, github: "brooklinjazz/hidden_cell"}
 ])
 ```
 
@@ -241,7 +241,22 @@ Supervisor.start_link(children, strategy: :one_for_one)
 Enter your solution below.
 
 ```elixir
+children = [
+  %{
+    id: :monster1,
+    start: {Monster, :start_link, [[name: :monster1]]}
+  },
+  %{
+    id: :monster2,
+    start: {Monster, :start_link, [[name: :monster2]]}
+  },
+  %{
+    id: :monster3,
+    start: {Monster, :start_link, [[name: :monster3]]}
+  }
+]
 
+Supervisor.start_link(children, strategy: :one_for_one)
 ```
 
 Call `Monster.attack/1` on your monster processes to ensure they are restarted.
@@ -257,7 +272,7 @@ Monster.attack(:monster1, 110)
 </details>
 
 ```elixir
-
+Monster.attack(:monster1, 110)
 ```
 
 ## Bonus: Hero
@@ -347,7 +362,7 @@ Kino.Process.sup_tree(supervisor)
 </details>
 
 ```elixir
-
+Kino.Process.sup_tree(supervisor)
 ```
 
 For improved observability, create a function that will print the health value for each `Monster` process under the named supervisor.

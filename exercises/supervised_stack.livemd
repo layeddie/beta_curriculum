@@ -117,6 +117,7 @@ Uncomment and evaluate the code below to test your supervisor.
 
 ```elixir
 GenServer.call(Stack, :pop)
+1
 ```
 
 ## Mark As Completed
