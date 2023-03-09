@@ -21,9 +21,19 @@ Mix.install([
 Upon completing this lesson, a student should be able to answer the following questions.
 
 * What are the common HTTP request methods and what do they do?
+
 * What is a web API, and how can we communcate with one using [HTTPoison](https://hexdocs.pm/httpoison/HTTPoison.html)?
+
 * What is JSON, and how can we parse it from an API response using [Jason](https://hexdocs.pm/jason/Jason.html)?
+
 * How can we authorize requests for a private API?
+
+<!-- livebook:{"break_markdown":true} -->
+
+*
+
+* An API is a way to communicate between pieces of software.
+*
 
 ## Setup
 
@@ -235,7 +245,9 @@ IO.puts("""
 Use [Jason.decode!/2](https://hexdocs.pm/jason/Jason.html#encode!/2) to decode the following JSON string.
 
 ```elixir
-json = "{\"hello\"\: \"world\"}"
+# json = "{\"hello\"\: \"world\"}"
+# Jason.decode!({\"hello\"\: \"world\"})
+Jason.decode!("{\"hello\"\: \"world\"}")
 ```
 
 ## Poison
