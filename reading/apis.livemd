@@ -335,7 +335,8 @@ api_key = ""
 Once you are sure the above works correctly, use [Poison.decode/2](https://hexdocs.pm/poison/Poison.html#decode/2) to decode the `response` into an Elixir map.
 
 ```elixir
-response
+# response
+Poison.decode!("{\"key\"\: \"value\"}")
 ```
 
 ## Mark As Completed
